@@ -6,7 +6,7 @@ require 'httparty'
 puts "Starting Kiwi_farmer at #{Time.now}"
 
 puts "Setting up AWS connection"
-config = JSON.parse(File.read('config/config.json'))
+config = JSON.parse(File.read(ENV['PAYLOAD_FILE']))
 ENV.update config
 sqs = Aws::SQS::Client.new
 q_url = sqs.get_queue_url(queue_name: 'Kiwi_messenger').queue_url
